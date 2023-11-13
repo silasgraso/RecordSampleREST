@@ -20,9 +20,9 @@ namespace RecordSampleREST.Controllers
         // GET: api/<MusicRecordsController>
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
-        public ActionResult<IEnumerable<MusicRecordRepository>> GetAll()
+        public ActionResult<IEnumerable<MusicRecordRepository>> GetAll([FromQuery] string? artist, [FromQuery] string? title, [FromQuery] int? publicationYearOlderThen, [FromQuery] int? durationGreaterThen)
         {   
-            return Ok(_musicRecordRepository.GetAllRecords());
+            return Ok(_musicRecordRepository.GetAllRecords(artist,title,publicationYearOlderThen,durationGreaterThen));
         }
 
         // GET api/<MusicRecordsController>/5

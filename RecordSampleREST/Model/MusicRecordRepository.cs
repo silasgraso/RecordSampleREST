@@ -18,9 +18,29 @@
 
 
 
-        public List<MusicRecords> GetAllRecords()
+        public List<MusicRecords> GetAllRecords(string? artist = null, string? title = null, int? publicationYearOlderThen = null, int? durationGreaterThen = null)
         {
-            return _musicRecords;
+            List<MusicRecords> filteredMusicRecords = new List<MusicRecords>(_musicRecords);
+
+            if (artist != null)
+            {
+                filteredMusicRecords = filteredMusicRecords.Where(musicRecord => musicRecord.Artist == artist).ToList();
+            }
+            if (title != null)
+            {
+                filteredMusicRecords = filteredMusicRecords.Where(musicRecord => musicRecord.Title == title).ToList();
+            }
+            if (publicationYearOlderThen != null)
+            {
+                filteredMusicRecords = filteredMusicRecords.Where(musicRecord => musicRecord.PublicationYear > publicationYearOlderThen).ToList();
+            }
+            if (durationGreaterThen != null)
+            {
+                filteredMusicRecords = filteredMusicRecords.Where(musicRecord => musicRecord.Duration > durationGreaterThen).ToList();
+            }
+           
+
+            return filteredMusicRecords;
         }
 
     }
