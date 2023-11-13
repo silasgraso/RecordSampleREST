@@ -21,8 +21,8 @@ namespace RecordSampleREST.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [HttpGet]
         public ActionResult<IEnumerable<MusicRecordRepository>> GetAll([FromQuery] string? artist, [FromQuery] string? title, [FromQuery] int? publicationYearOlderThen, [FromQuery] int? durationGreaterThen)
-        {   
-            return Ok(_musicRecordRepository.GetAllRecords(artist,title,publicationYearOlderThen,durationGreaterThen));
+        {
+            return Ok(_musicRecordRepository.GetAllRecords(artist, title, publicationYearOlderThen, durationGreaterThen));
         }
 
         // GET api/<MusicRecordsController>/5
@@ -34,9 +34,24 @@ namespace RecordSampleREST.Controllers
 
         // POST api/<MusicRecordsController>
         [HttpPost]
-        public void Post([FromBody] string value)
+        public ActionResult<MusicRecords?> Post([FromBody] MusicRecords newMusicRecords)
         {
+            MusicRecords? addedMusicRecords = _musicRecordRepository.Add(newMusicRecords);
+            try
+            {
+                return Created("/" + addedMusicRecords.Id, addedMusicRecords);
+            }
+            catch (ArgumentNullException ex)
+            {
+                return BadRequest(ex.Message);
+            }
+            catch (ArgumentOutOfRangeException ex)
+            {
+                return BadRequest(ex.Message);
+            }
         }
+    
+
 
         // PUT api/<MusicRecordsController>/5
         [HttpPut("{id}")]

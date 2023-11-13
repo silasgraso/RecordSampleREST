@@ -19,8 +19,8 @@ namespace RecordSampleRESTTests.Model
         [ClassInitialize]
         public static void Setup(TestContext context)
         {
-            //_driver = new ChromeDriver(DriverDirectory);
-            _driver = new EdgeDriver(DriverDirectory);
+            _driver = new ChromeDriver(DriverDirectory);
+            //_driver = new EdgeDriver(DriverDirectory);
 
         }
 
@@ -33,10 +33,15 @@ namespace RecordSampleRESTTests.Model
         [TestMethod]
         public void TestMethod1()
         {
-            //_driver.Navigate().GoToUrl("file:///C:/Users/ohsab/Desktop/Datamatiker/3.%20Semester/Programmering/JavaScript/MusicRecords/index.html");
-            _driver.Navigate().GoToUrl("file:///C:/JavaScript/MusicRecords/MusicRecords/index.html");
+            _driver.Navigate().GoToUrl("file:///C:/Users/ohsab/Desktop/Datamatiker/3.%20Semester/Programmering/JavaScript/MusicRecords/index.html");
+            //_driver.Navigate().GoToUrl("file:///C:/JavaScript/MusicRecords/MusicRecords/index.html");
             string Title = _driver.Title;
             Assert.AreEqual("Music Records", Title);
+            IWebElement artist = _driver.FindElement(By.Id("artist"));
+            artist.SendKeys("The Beatles");
+            artist.SendKeys(Keys.Enter);
+
+
         }
 
     }

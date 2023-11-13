@@ -18,5 +18,15 @@ namespace RecordSampleREST.Model.Tests
            List<MusicRecords> musicRecords = musicRecordRepository.GetAllRecords();
            Assert.AreEqual(3, musicRecords.Count);
         }
+
+        [TestMethod()]
+        public void AddTest()
+        {
+            MusicRecordRepository musicRecordRepository = new MusicRecordRepository();
+            MusicRecords musicRecords = new MusicRecords { Artist = "The Beatles", Title = "Abbey Road", PublicationYear = 1969, Duration = 47 };
+            musicRecordRepository.Add(musicRecords);
+            List<MusicRecords> musicRecordsList = musicRecordRepository.GetAllRecords();
+            Assert.AreEqual(4, musicRecordsList.Count);
+        }
     }
 }
