@@ -54,5 +54,16 @@ namespace RecordSampleREST.Model
             return musicRecords;
         }
 
+        public MusicRecords? Delete(int id)
+        {
+            MusicRecords? musicRecord = _musicRecords.FirstOrDefault(musicRecord => musicRecord.Id == id);
+            if (musicRecord == null)
+            {
+                return null;
+            }
+            _musicRecords.Remove(musicRecord);
+            return musicRecord;
+        }
+
     }
 }

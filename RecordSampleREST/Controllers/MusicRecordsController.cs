@@ -61,8 +61,14 @@ namespace RecordSampleREST.Controllers
 
         // DELETE api/<MusicRecordsController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public ActionResult<MusicRecords?> Delete(int id)
         {
+            MusicRecords? musicRecord = _musicRecordRepository.Delete(id);
+            if (musicRecord == null)
+            {
+                return NotFound();
+            }
+            return Ok(musicRecord);
         }
     }
 }

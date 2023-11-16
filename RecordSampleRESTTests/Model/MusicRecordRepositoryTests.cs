@@ -28,5 +28,15 @@ namespace RecordSampleREST.Model.Tests
             List<MusicRecords> musicRecordsList = musicRecordRepository.GetAllRecords();
             Assert.AreEqual(4, musicRecordsList.Count);
         }
+
+        [TestMethod()]
+        public void DeleteTest()
+        {
+            MusicRecordRepository musicRecordRepository = new MusicRecordRepository();
+            MusicRecords? deletedMusicRecord = musicRecordRepository.Delete(1);
+            Assert.IsNotNull(deletedMusicRecord);
+            List<MusicRecords> musicRecordsList = musicRecordRepository.GetAllRecords();
+            Assert.AreEqual(2, musicRecordsList.Count);
+        }
     }
 }
