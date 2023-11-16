@@ -66,5 +66,16 @@ namespace RecordSampleRESTTests.Model
 
         }
 
+        [TestMethod]
+
+        public void DeleteTest()
+        {
+            IWebElement deleteMusicRecord = _driver.FindElement(By.Id("deleteById"));
+            deleteMusicRecord.SendKeys("1");
+            IWebElement deleteButton = _driver.FindElement(By.Id("deleteMusicRecord"));
+            deleteButton.Click();
+            
+        }
+
     }
 }
