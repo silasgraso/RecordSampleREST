@@ -19,8 +19,11 @@ namespace RecordSampleRESTTests.Model
         [ClassInitialize]
         public static void Setup(TestContext context)
         {
-            _driver = new ChromeDriver(DriverDirectory);
-            //_driver = new EdgeDriver(DriverDirectory);
+            //_driver = new ChromeDriver(DriverDirectory);
+            _driver = new EdgeDriver(DriverDirectory);
+
+            //_driver.Navigate().GoToUrl("file:///C:/Users/ohsab/Desktop/Datamatiker/3.%20Semester/Programmering/JavaScript/MusicRecords/index.html");
+            _driver.Navigate().GoToUrl("file:///C:/JavaScript/MusicRecords/MusicRecords/index.html");
 
         }
 
@@ -31,16 +34,35 @@ namespace RecordSampleRESTTests.Model
         }
 
         [TestMethod]
-        public void TestMethod1()
+        public void FilterTest()
         {
-            _driver.Navigate().GoToUrl("file:///C:/Users/ohsab/Desktop/Datamatiker/3.%20Semester/Programmering/JavaScript/MusicRecords/index.html");
-            //_driver.Navigate().GoToUrl("file:///C:/JavaScript/MusicRecords/MusicRecords/index.html");
+            
             string Title = _driver.Title;
             Assert.AreEqual("Music Records", Title);
             IWebElement artist = _driver.FindElement(By.Id("artist"));
             artist.SendKeys("The Beatles");
             artist.SendKeys(Keys.Enter);
 
+
+
+        }
+
+        [TestMethod]
+        public void AddTest()
+        {
+            
+
+            IWebElement addArtist = _driver.FindElement(By.Id("addArtist"));
+            addArtist.SendKeys("Ozan");
+            IWebElement addTitle = _driver.FindElement(By.Id("addTitle"));
+            addTitle.SendKeys("Silas er Gud");
+            IWebElement addYear = _driver.FindElement(By.Id("addYear"));
+            addYear.SendKeys("2023");
+            IWebElement addDuration = _driver.FindElement(By.Id("addDuration"));
+            addDuration.SendKeys("150");
+            IWebElement addMusicRecord = _driver.FindElement(By.Id("addMusicRecord"));
+            addMusicRecord.Click();
+            
 
         }
 
