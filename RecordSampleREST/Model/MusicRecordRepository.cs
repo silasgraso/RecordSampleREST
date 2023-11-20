@@ -65,5 +65,19 @@ namespace RecordSampleREST.Model
             return musicRecord;
         }
 
+        public MusicRecords? Update(int id, MusicRecords musicRecord)
+        {
+            MusicRecords? musicRecordToUpdate = _musicRecords.FirstOrDefault(musicRecord => musicRecord.Id == id);
+            if (musicRecordToUpdate == null)
+            {
+                return null;
+            }
+            musicRecordToUpdate.Artist = musicRecord.Artist;
+            musicRecordToUpdate.Title = musicRecord.Title;
+            musicRecordToUpdate.PublicationYear = musicRecord.PublicationYear;
+            musicRecordToUpdate.Duration = musicRecord.Duration;
+            return musicRecordToUpdate;
+        }
+
     }
 }

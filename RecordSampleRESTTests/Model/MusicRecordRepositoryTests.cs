@@ -17,7 +17,7 @@ namespace RecordSampleREST.Model.Tests
         private static IMusicRepository _musicRepository;
 
         [ClassInitialize]
-        public static void Setup(TestContext context)
+        public static void ClassInitialize(TestContext context)
         {
             if (useDatabase)
             {
@@ -58,6 +58,19 @@ namespace RecordSampleREST.Model.Tests
             Assert.IsNotNull(deletedMusicRecord);
             IEnumerable<MusicRecords> musicRecordsList = musicRecordRepository.GetAllRecords();
             Assert.AreEqual(2, musicRecordsList.Count());
+        }
+
+        [TestMethod()]
+        public void UpdateTest()
+        {
+            MusicRecordRepository musicRecordRepository = new MusicRecordRepository();
+            MusicRecords musicRecords = new MusicRecords { Artist = "The Beatles", Title = "Abbey Road", PublicationYear = 1969, Duration = 47 };
+
+            MusicRecords? updatedMusicRecord = musicRecordRepository.Update(1, musicRecords);
+            Assert.IsNotNull(updatedMusicRecord);
+            Assert.IsNotNull(updatedMusicRecord?.Artist);
+            Assert.AreEqual("The Beatles", updatedMusicRecord?.Artist);
+            Assert.AreEqual(1969, updatedMusicRecord?.PublicationYear);
         }
     }
 }

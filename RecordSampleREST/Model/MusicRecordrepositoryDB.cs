@@ -51,5 +51,22 @@
             return musicRecord;
         }
 
+        public MusicRecords? Update(int id, MusicRecords musicRecord)
+        {
+            MusicRecords? musicRecordToUpdate = _musicRecordDBContext.MusicRecords.FirstOrDefault(musicRecord => musicRecord.Id == id);
+
+            if (musicRecord == null)
+            {
+                return null;
+            }
+
+            musicRecord.Validate();
+            musicRecordToUpdate.Artist = musicRecord.Artist;
+            musicRecordToUpdate.Title = musicRecord.Title;
+            musicRecordToUpdate.PublicationYear = musicRecord.PublicationYear;
+            musicRecordToUpdate.Duration = musicRecord.Duration;
+            return musicRecordToUpdate;
+        }
+
     }
 }
