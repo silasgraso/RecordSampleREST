@@ -2,7 +2,7 @@
 
 namespace RecordSampleREST.Model
 {
-    public class MusicRecordRepository
+    public class MusicRecordRepository : IMusicRepository
     {
         private List<MusicRecords> _musicRecords = new();
         private int _nextId = 1;
@@ -21,9 +21,9 @@ namespace RecordSampleREST.Model
 
 
 
-        public List<MusicRecords> GetAllRecords(string? artist = null, string? title = null, int? publicationYearOlderThen = null, int? durationGreaterThen = null)
+        public IEnumerable<MusicRecords> GetAllRecords(string? artist = null, string? title = null, int? publicationYearOlderThen = null, int? durationGreaterThen = null)
         {
-            List<MusicRecords> filteredMusicRecords = new List<MusicRecords>(_musicRecords);
+            IEnumerable<MusicRecords> filteredMusicRecords = new List<MusicRecords>(_musicRecords);
 
             if (artist != null)
             {

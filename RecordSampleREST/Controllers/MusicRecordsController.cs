@@ -10,9 +10,8 @@ namespace RecordSampleREST.Controllers
     [ApiController]
     public class MusicRecordsController : ControllerBase
     {
-        private readonly MusicRecordRepository _musicRecordRepository;
-
-        public MusicRecordsController(MusicRecordRepository musicRecordRepository)
+        private IMusicRepository _musicRecordRepository;
+        public MusicRecordsController(IMusicRepository musicRecordRepository)
         {
             _musicRecordRepository = musicRecordRepository;
         }
